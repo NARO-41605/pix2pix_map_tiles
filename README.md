@@ -1,5 +1,5 @@
 # pix2pix for Map tiles
-Web上で公開されている地図タイル画像を、[pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow)を用いて画像変換を行うために各種プログラムを公開する．
+本レポジトリでは，Web上で公開されている地図タイル画像を、[pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow)を用いて画像変換を行うための各種プログラムを公開する．
 
 ## 動作環境
 本プログラム、以下の環境において動作確認を行っている。
