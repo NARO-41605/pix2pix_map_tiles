@@ -172,7 +172,7 @@ pix2pix_multi.py  --input_dir "INPUT_DIR"
 		  --GPUdevice "GPUDEVICE"		  
 ~~~
 | 変数 | 説明 |
-----|---- 
+----|----
 | --input_dir| 学習用データセットがあるディレクトリ。 |
 | --mode |プログラムの実行モード。学習をする際には、"train"を指定。 |
 | --output_dir | モデルの出力先ディレクトリ |
@@ -187,7 +187,7 @@ pix2pix_multi.py  --input_dir "INPUT_DIR"
 | --GPUdevice | 実行するGPUの番号を指定します。デフォルトは0。複数のGPUがあるマシンを使用する場合に任意のGPUを指定して実行します。
 GPUがない場合はCPUを使用して実行されます。 |
 
-*実行中に`--save_freq`で指定したステップごとに指定した保存先に学習モデル `model-{ステップ数}.data -00000-of-00001、model-{ステップ数}.index、model-{ステップ数}.meta` が出力されます。
+* 実行中に`--save_freq`で指定したステップごとに指定した保存先に学習モデル `model-{ステップ数}.data -00000-of-00001、model-{ステップ数}.index、model-{ステップ数}.meta` が出力されます。
 
 ### 参考
 この学習プログラムは、[pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow)を基に作成しています。学習プログラムの詳細については基となったプログラムの配布ページを参照してください。
