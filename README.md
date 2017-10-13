@@ -1,5 +1,5 @@
 # pix2pix for Map tiles
-Web上で公開されている地図タイル画像を、[pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow)を用いて画像変換を行うために各種プログラムである。
+Web上で公開されている地図タイル画像を、[pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow)を用いて画像変換を行うために各種プログラムを公開する．
 
 ## 動作環境
 本プログラム、以下の環境において動作確認を行っている。
@@ -183,8 +183,7 @@ pix2pix_multi.py  --input_dir "INPUT_DIR"
 | --ndf | 判別器の第一層のフィルター数。デフォルトは64。 |
 | --input_ch | 入力データのチャンネル数。デフォルトは4。 |
 | --target_ch | 教師データのチャンネル数。デフォルトは4。 |
-| --GPUdevice | 実行するGPUの番号を指定します。デフォルトは0。複数のGPUがあるマシンを使用する場合に任意のGPUを指定して実行します。
-GPUがない場合はCPUを使用して実行されます。 |
+| --GPUdevice | 実行するGPUの番号を指定します。デフォルトは0。複数のGPUがあるマシンを使用する場合に任意のGPUを指定して実行します。GPUがない場合はCPUを使用して実行されます。 |
 
 * 実行中に`--save_freq`で指定したステップごとに指定した保存先に学習モデル `model-{ステップ数}.data -00000-of-00001、model-{ステップ数}.index、model-{ステップ数}.meta` が出力されます。
 
