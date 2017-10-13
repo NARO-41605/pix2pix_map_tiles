@@ -141,12 +141,12 @@ python DataSetMake_tfwiter.py "images_x_start" "images_x_end" "images_y_start" "
                               --inputJson "INPUTJSON"
                               --outputPath "OUTPUTPATH"
 ~~~
-| 変数 | 説明 |
+| 引数 | 説明 |
 ----|---- 
-| [images_x_start] | 指定する範囲の始点となるタイルのx方向の位置 |
-| [images_x_end] | 指定する範囲の始点となるタイルのx方向の位置 |
-| [images_y_start] | 指定する範囲の始点となるタイルのy方向の位置 |
-| [images_y_end] | 指定する範囲の終点となるタイルのy方向の位置 |
+| "images_x_start" | 指定する範囲の始点となるタイルのx方向の位置 |
+| "images_x_end" | 指定する範囲の始点となるタイルのx方向の位置 |
+| "images_y_start" | 指定する範囲の始点となるタイルのy方向の位置 |
+| "images_y_end" | 指定する範囲の終点となるタイルのy方向の位置 |
 | --inputJson "INPUTJSON" | 地図タイル取得先URLを設定したjson形式のファイルを指定します。デフォルトは"./jsonSample.txt"|
 | --outputPath "OUTPUTPATH" | データセットの出力先ディレクトリの指定。ディレクトリがない場合は自動生成します。デフォルトは"Data" |
 
@@ -171,3 +171,24 @@ pix2pix_multi.py  --input_dir "INPUT_DIR"
 		  --target_ch "TARGET_CH"
 		  --GPUdevice "GPUDEVICE"		  
 ~~~
+| 変数 | 説明 |
+----|---- 
+| --input_dir| 学習用データセットがあるディレクトリ。 |
+| --mode |プログラムの実行モード。学習をする際には、"train"を指定。 |
+| --output_dir | モデルの出力先ディレクトリ |
+| --checkpoint | 読み込む学習済みモデルがあるディレクトリ。指定しない場合、新規で学習を行なう。 |
+| --max_epochs | 学習回数|
+| --progress_freq | 学習時に学習状況を表示するステップ数。デフォルトは50 |
+| --save_freq | モデルを保存するステップ数。デフォルトは100。 |
+| --ngf | 生成器の第一層のフィルター数。デフォルトは64。 |
+| --ndf | 判別器の第一層のフィルター数。デフォルトは64。 |
+| --input_ch | 入力データのチャンネル数。デフォルトは4。 |
+| --target_ch | 教師データのチャンネル数。デフォルトは4。 |
+| --GPUdevice | 実行するGPUの番号を指定します。デフォルトは0。複数のGPUがあるマシンを使用する場合に任意のGPUを指定して実行します。
+GPUがない場合はCPUを使用して実行されます。 |
+
+*実行中に`--save_freq`で指定したステップごとに指定した保存先に学習モデル `model-{ステップ数}.data -00000-of-00001、model-{ステップ数}.index、model-{ステップ数}.meta` が出力されます。
+
+### 参考
+この学習プログラムは、[pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow)を基に作成しています。学習プログラムの詳細については基となったプログラムの配布ページを参照してください。
+
