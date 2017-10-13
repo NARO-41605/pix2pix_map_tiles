@@ -192,4 +192,4 @@ GPUがない場合はCPUを使用して実行されます。 |
 ### 参考
 この学習プログラムは、[pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow)を基に作成しています。学習プログラムの詳細については基となったプログラムの配布ページを参照してください。
 
-また、LANDSAT7号の画像と地理院地図PNG標高タイルを用いて、環境省植生図を学習させたサンプルを[lad2veg](https://github.com/NARO-41605/pix2pix_map_tiles/tree/master/lad2veg)にアップロードしてあります。設定を含めて、参考にしてください。
+また、LANDSAT7号の画像と地理院地図PNG標高タイルを用いて、環境省植生図を学習させたサンプルを[lad2veg](https://github.com/NARO-41605/pix2pix_map_tiles/tree/master/lad2veg)にアップロードしてあります。`--mode test`の結果については https://naro-41605.github.io/pix2pix_map_tiles/lad2veg/output/index.html で閲覧できます。
