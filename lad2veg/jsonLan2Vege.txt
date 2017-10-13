@@ -1,0 +1,36 @@
+{
+ "targetURL": {
+               "url": "http://map.ecoris.info/tiles/vege67/", 
+               "type": "tile", 
+               "format": "{z}/{x}/{y}.png"
+              }, 
+ "inputURL": [
+              {
+               "url": "http://ows8.geogrid.org/land7uswms/LE71070352000137HAJ00?LAYERS=default&TRANSPARENT=TRUE&", 
+               "type": "wms", 
+               "format": "SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/png&BBOX={miny},{minx},{maxy},{maxx}&SRS=EPSG:4612&width={output_height}&height={output_height}&ua=landbrowser"
+               },
+              {
+               "url": "http://ows8.geogrid.org/land7uswms/LE71070352000137HAJ00?LAYERS=BAND62COLOR&TRANSPARENT=TRUE&", 
+               "type": "wms", 
+               "format": "SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/png&BBOX={miny},{minx},{maxy},{maxx}&SRS=EPSG:4612&width={output_height}&height={output_height}&ua=landbrowser"
+               },
+              {
+               "url": "http://ows8.geogrid.org/land7uswms/LE71070352000361EDC00?LAYERS=default&TRANSPARENT=TRUE&", 
+               "type": "wms", 
+               "format": "SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/png&BBOX={miny},{minx},{maxy},{maxx}&SRS=EPSG:4612&width={output_height}&height={output_height}&ua=landbrowser"
+               },
+              {
+               "url": "http://ows8.geogrid.org/land7uswms/LE71070352000361EDC00?LAYERS=BAND62COLOR&TRANSPARENT=TRUE&", 
+               "type": "wms", 
+               "format": "SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/png&BBOX={miny},{minx},{maxy},{maxx}&SRS=EPSG:4612&width={output_height}&height={output_height}&ua=landbrowser"
+               },
+              {
+               "url": "http://cyberjapandata.gsi.go.jp/xyz/dem_png/", 
+               "type": "tile", 
+               "format": "{z}/{x}/{y}.png"
+              }
+             ]
+}
+
+
