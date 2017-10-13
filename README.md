@@ -154,3 +154,20 @@ python DataSetMake_tfwiter.py "images_x_start" "images_x_end" "images_y_start" "
 * 実行後、--outputPathで指定したディレクトリ内に{通し番号}.tfrecordsが取得したタイルの枚数分生成されます。また、プログラムを実行したディレクトリ内に取得したタイルを繋げた、input_image{通し番号}.png、target_image{通し番号}.pngが生成されます。
 * 同時に、スクリプトを実行したディレクトリに、`target_image.png`と`input_image0.png`, `input_image1.png`という形で、入力に使用したタイルを結合したファイルが生成されます。
 
+### 学習用の実行
+学習の実行には、`pix2pix_multi.py`を使用します。実行形式および主なパラメータは以下の通りです。
+
+~~~
+pix2pix_multi.py  --input_dir "INPUT_DIR" 
+                  --mode {train,test,export} 
+                  --output_dir "OUTPUT_DIR"
+                  --checkpoint "CHECKPOINT"
+                  --max_steps "MAX_STEPS"
+		  --max_epochs "MAX_EPOCHS"
+                  --progress_freq "PROGRESS_FREQ"
+		  --save_freq "SAVE_FREQ"
+		  --ngf "NGF"
+                  --input_ch "INPUT_CH"
+		  --target_ch "TARGET_CH"
+		  --GPUdevice "GPUDEVICE"		  
+~~~
