@@ -150,9 +150,8 @@ python DataSetMake_tfwiter.py "images_x_start" "images_x_end" "images_y_start" "
 | --inputJson "INPUTJSON" | 地図タイル取得先URLを設定したjson形式のファイルを指定します。デフォルトは"./jsonSample.txt"|
 | --outputPath "OUTPUTPATH" | データセットの出力先ディレクトリの指定。ディレクトリがない場合は自動生成します。デフォルトは"Data" |
 
-* 実行中はタイルの取得先URLと入力データのチャンネル数（input channel）、教師データのチャンネル数（target channel）等が表示されます。各チャンネル数はpix2pix実行時に入力するので確認するようにしてください。
+* 実行中はタイルの取得先URLと入力データのチャンネル数（input channel）、教師データのチャンネル数（target channel）等が表示されます。各チャンネル数は `pix2pix_multi.py` 実行時に入力するので確認するようにしてください。
 * 実行後、--outputPathで指定したディレクトリ内に{通し番号}.tfrecordsが取得したタイルの枚数分生成されます。また、プログラムを実行したディレクトリ内に取得したタイルを繋げた、input_image{通し番号}.png、target_image{通し番号}.pngが生成されます。
-* 同時に、スクリプトを実行したディレクトリに、`target_image.png`と`input_image0.png`, `input_image1.png`という形で、入力に使用したタイルを結合したファイルが生成されます。
 
 ### 学習用の実行
 学習の実行には、`pix2pix_multi.py`を使用します。実行形式および主なパラメータは以下の通りです。
