@@ -7,7 +7,7 @@
 | 分類 | バージョン |
 ----|---- 
 | OS | Ubuntu 16.04 LTR 64bit |
-| フレームワーク等 | Python 2.7.6 |
+| フレームワーク等 | Python 2.7.12 |
 |  | tensorflow 1.0.0 |
 |  | CUDA 8.0.61 （GPU環境のみ）|
 |  | CuDNN V5.1 （GPU環境のみ）|
