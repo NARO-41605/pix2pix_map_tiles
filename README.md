@@ -6,11 +6,11 @@
 
 | 分類 | バージョン |
 ----|---- 
-| OS | Ubuntu 14.04 LTR 64bit |
+| OS | Ubuntu 16.04 LTR 64bit |
 | フレームワーク等 | Python 2.7.6 |
 |  | tensorflow 1.0.0 |
-|  | CUDA 8.0 （GPU環境のみ）|
-|  | CuDNN V5 （GPU環境のみ）|
+|  | CUDA 8.0.61 （GPU環境のみ）|
+|  | CuDNN V5.1 （GPU環境のみ）|
 
 ## インストール方法
 1.  実行に必要な各パッケージをインストールします。
