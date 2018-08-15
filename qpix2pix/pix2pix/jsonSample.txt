@@ -1,0 +1,19 @@
+{
+ "targetURL": {
+               "url": "http://www.j-shis.bosai.go.jp/map/wms/landslide?", 
+               "type": "wms", 
+               "format": "SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={minx},{miny},{maxx},{maxy}&CRS=EPSG:4612&WIDTH={output_width}&HEIGHT={output_height}&LAYERS=L-V3-S300&FORMAT=image/png&TRANSPARENT=FALSE"
+              }, 
+ "inputURL": [
+              {
+               "url": "http://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/", 
+               "type": "tile", 
+               "format": "{z}/{x}/{y}.jpg"
+              }, 
+              {
+               "url": "https://gbank.gsj.jp/seamless/tilemap/", 
+               "type": "tile", 
+               "format": "tilemap/detailed/g/{z}/{y}/{x}.png"
+              }
+             ]
+}
