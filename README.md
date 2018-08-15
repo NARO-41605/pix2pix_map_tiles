@@ -1,19 +1,19 @@
 # pix2pix for Map tiles
-本レポジトリでは，Web上で公開されている地図タイル画像を、[pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow)を用いて画像変換を行うための各種プログラムを公開する．
+In this repository, we release various programs for image conversion using [pix 2 pix - tensor flow] (https://github.com/affinelayer/pix 2 pix - tensorflow) for map tile images published on the web .
 
-## 動作環境
-本プログラム、以下の環境において動作確認を行っている。
+## Operating environment
+The operating environment is below. 
 
-| 分類 | バージョン |
+| Category | version |
 ----|---- 
 | OS | Ubuntu 16.04 LTR 64bit |
-| フレームワーク等 | Python 2.7.12 |
+| Framework | Python 2.7.12 |
 |  | tensorflow 1.0.0 |
-|  | CUDA 8.0.61 （GPU環境のみ）|
-|  | CuDNN V5.1 （GPU環境のみ）|
+|  | CUDA 8.0.61 (for GPU Environment) |
+|  | CuDNN V5.1 (for GPU Environment) |
 
-## インストール方法
-1.  実行に必要な各パッケージをインストールします。
+## Installation
+1. Install required packages
 
 ~~~
 sudo apt-get update
@@ -48,35 +48,34 @@ sudo pip install \
     pillow
 ~~~
 
-２.  Tensorflowをインストールします。
+2. Install Tensorflow
 
-* CPUのみを使用する場合
+* No GPU Environment
 ~~~
 sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp27-none-linux_x86_64.whl
 ~~~
 
-* GPUも使用する場合
+* With GPU Environment
 ~~~
 sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.0.0-cp27-none-linux_x86_64.whl
 ~~~
 
-３.  任意の場所に`DataSetMake_tfwiter.py`および`pix2pix_multi.py`を配置する。
+3. Coty `DataSetMake_tfwiter.py` and `pix2pix_multi.py` to 
 
-以上で、インストールは完了です。
+Then, you can use programes. 
 
-## 操作方法
-### 地図タイル取得先URLの設定
+## How to use
+### Set a Map tile fetching URL
 
-まず、地図タイルを取得するURL指定するファイルをJSON形式で作成します。作成するJSON形式ファイルの内容は以下の通りです。
-
+First, You have to create JSON format file whicn include URL of fetching Map tile. A format of JSON file is below. 
 ~~~
 {
- "targetURL": 教師データとなる地図タイルの取得先
+ "targetURL": URL of target map tile
 , 
  "inputURL": [
-               入力データとなる地図タイルの取得先１
+               URL of target map tile 1
               , 
-               入力データとなる地図タイルの取得先２
+               URL of target map tile 2
              ]
 }
 
