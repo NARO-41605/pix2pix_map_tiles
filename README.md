@@ -96,14 +96,14 @@ Fromat of URL of fetching tile is below.
 }
 ~~~
 
-| 変数 | 説明 |
+| Parameter | Discription |
 ----|---- 
 | "url" | Base URL of fetching tile |
 | "type" | Type of map tile. If you use WMST or "Map tile", set "tile". You can also set "wms" for OGS WMS Standard |
 | "format" | Setting for extention, tile address, parapeter for WMTS and WMS. Detail of setting, please refer setting samples in below. |
 
 
-#### タイル地図形式の地図タイル取得先設定例(国土地理院 全国最新写真（シームレス）)
+#### Example for fetching tiled map format (GSI Japanese Aerial Photo (seamless))
 ~~~
 {
 "url": "http://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/", 
@@ -111,12 +111,11 @@ Fromat of URL of fetching tile is below.
  "format": "{z}/{x}/{y}.jpg"
 }
 ~~~
-* タイル地図形式の"format"では主としてタイル座標と拡張子やWMTSのパラメータ等を設定します。取得先の形式に従って設定してください。
-* タイル座標については以下のように記述してください。
-	* {z} : ズームレベル、{x} : タイルのX座標、{y} : タイルのY座標
+* "format" for map tile type, plese set the tile coordinate oder (for example, {z}/{x}/{y}, {z}/{y}/{x}...), extention of tile, parameter of WMST and other. Please referr discripton of map tile provider.
 
 
-#### WMS形式の地図タイル取得先設定例(地震ハザードステーション 地すべり地形分布図WMSサービス)
+
+#### Example for fetching WMS map tile (J-SHIS Land slide map WMS Service)
 ~~~
 {
 "url": "http://www.j-shis.bosai.go.jp/map/wms/landslide?", 
@@ -124,23 +123,23 @@ Fromat of URL of fetching tile is below.
 "format": "SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={minx},{miny},{maxx},{maxy}&CRS=EPSG:4612&WIDTH={output_width}&HEIGHT={output_height}&LAYERS=L-V3-S300&FORMAT=image/png&TRANSPARENT=FALSE"
 }
 ~~~
-* WMS形式の"format"ではWMSのパラメータ設定を行ないます。取得先の形式に従って設定してください。
-* WMSのパラメータの中で取得範囲指定を行なうBBOX、取得する画像のサイズを指定するWIDTH、HEIGHTについては以下のように記述してください。
+* "format" for WMS service, please set WMS request parameter. Please referr discripton of map tile provider.
+* BBOX, WIDHT and HEIGHT in WMS request, please set below.
 ~~~
  BBOX={minx},{miny},{maxx},{maxy}
  WIDTH={output_width}
  HEIGHT={output_height}
 ~~~
 
-### 学習用データセットの作成
-学習用データセットの作成には、`DataSetMake_tfwiter.py`を使用します。実行形式およびパラメータは以下の通りです。
+### Make training data set
+`DataSetMake_tfwiter.py` is used to create training data set. Parameters are below.
 
 ~~~
 python DataSetMake_tfwiter.py "images_x_start" "images_x_end" "images_y_start" "images_y_end" "zoom_level"
                               --inputJson "INPUTJSON"
                               --outputPath "OUTPUTPATH"
 ~~~
-| 引数 | 説明 |
+| Parameter | Discription |
 ----|---- 
 | "images_x_start" | 指定する範囲の始点となるタイルのx方向の位置 |
 | "images_x_end" | 指定する範囲の始点となるタイルのx方向の位置 |
@@ -169,7 +168,7 @@ pix2pix_multi.py  --input_dir "INPUT_DIR"
 		  --target_ch "TARGET_CH"
 		  --GPUdevice "GPUDEVICE"		  
 ~~~
-| 変数 | 説明 |
+| Parameter | Discription |
 ----|----
 | --input_dir| 学習用データセットがあるディレクトリ。 |
 | --mode |プログラムの実行モード。学習をする際には、"train"を指定。 |
