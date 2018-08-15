@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -548,7 +549,7 @@ def save_images(fetches, step=None):
         name, _ = os.path.splitext(os.path.basename(in_path.decode("utf8")))
         fileset = {"name": name, "step": step}
         for kind in ["inputs", "outputs", "targets"]:
-            filename = name + "-" + kind + ".png"
+            filename = name.encode("utf-8") + "-" + kind + ".png"
             if step is not None:
                 filename = "%08d-%s" % (step, filename)
             fileset[kind] = filename
@@ -775,8 +776,8 @@ def main():
 
         if a.checkpoint is not None:
             print("loading model from checkpoint")
-            checkpoint = tf.train.latest_checkpoint(a.checkpoint)
-            print ("loading model : " + str(checkpoint))
+            checkpoint = tf.train.latest_checkpoint(a.checkpoint.decode("utf-8"))
+            print ("loading model : " + str(checkpoint.encode("utf-8")))
             saver.restore(sess, checkpoint)
 
         max_steps = 2**32

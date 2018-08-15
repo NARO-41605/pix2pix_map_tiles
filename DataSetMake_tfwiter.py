@@ -28,16 +28,10 @@ args = parser.parse_args()
 
 TILE_SIZE = 256
 
-"""
-INPUT_URL = [{'type':'tile', 'url':"http://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/", 'format':'Z/X/Y.jpg'},
-             {'type':'wms', 'url':"https://gbank.gsj.jp/ows/seamlessgeology200k_b?", 'format':
-              'SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=minx,miny,maxx,maxy&CRS=EPSG:4612&WIDTH=output_width&HEIGHT=output_height&LAYERS=area&FORMAT=image/png&TRANSPARENT=FALSE'},
-            ]
-TARGET_URL = {'type':'wms', 'url':"http://www.j-shis.bosai.go.jp/map/wms/landslide?", 'format':
-              "SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=minx,miny,maxx,maxy&CRS=EPSG:4612&WIDTH=output_width&HEIGHT=output_height&LAYERS=L-V3-S300&FORMAT=image/png&TRANSPARENT=FALSE"}
-"""
-jsonFile = open(args.inputJson)
-json_dict = json.load(jsonFile)
+#jsonFile = open(args.inputJson)
+#json_dict = json.load(jsonFile)
+with open(args.inputJson, 'r') as json_fp:
+    json_dict = json.loads(json_fp.read(),'utf-8')
 print (str(json_dict))
 INPUT_URL = json_dict['inputURL']
 TARGET_URL = json_dict['targetURL']
@@ -78,47 +72,64 @@ def demtofloat(n):
         return float(n)
 
 def getTile(req_target, i, j, zoom_level):
-    if req_target['type'] == 'tile':
-        url_format = req_target['format']
-        url_format = url_format.replace('{z}', str(zoom_level))
-        url_format = url_format.replace('{x}', str(i))
-        url_format = url_format.replace('{y}', str(j))
-        input_image_url = req_target['url'] + url_format
-
-    elif req_target['type'] == 'wms':
-        start_point = tile2latlon(i, j, zoom_level)
-        end_point = tile2latlon(i + 1, j + 1, zoom_level)
-        url_format = req_target['format']
-        url_format = url_format.replace('{minx}', str(end_point[1]))
-        url_format = url_format.replace('{miny}', str(start_point[0]))
-        url_format = url_format.replace('{maxx}', str(start_point[1]))
-        url_format = url_format.replace('{maxy}', str(end_point[0]))
-        url_format = url_format.replace('{maxy}', str(end_point[0]))
-        url_format = url_format.replace('{output_width}', str(TILE_SIZE))
-        url_format = url_format.replace('{output_height}', str(TILE_SIZE))
-        input_image_url = req_target['url'] + url_format
-
-    print 'input : ' + input_image_url
-
-    res = requests.get(input_image_url, verify=False)
     input_img_p = Image.new('RGBA', (TILE_SIZE, TILE_SIZE), (0, 0, 0, 0))
     error_flg = 0
 
-    if res.status_code == 200:
-        content_type = res.headers["content-type"]
-        if 'image' not in content_type:
-            print("Not image URL : %d - %d - %d" % (zoom_level, i, j))
+    if req_target['type'] == 'localTile':
+        path_format = req_target['format']
+        path_format = path_format.replace('{z}', str(zoom_level))
+        path_format = path_format.replace('{x}', str(i))
+        path_format = path_format.replace('{y}', str(j))
+        input_image_path = os.path.join(req_target['path'], path_format)
+
+        if os.path.isfile(input_image_path):
+            input_img_p = Image.open(input_image_path)
+            input_img_p = input_img_p.resize((TILE_SIZE, TILE_SIZE))
+        else:
+            print("Can't get tile : %d - %d - %d" % (zoom_level, i, j))
             error_flg = 1
             return input_img_p, error_flg
 
-        resfile = StringIO(res.content)
-        input_img_p = Image.open(resfile)
-        input_img_p = input_img_p.resize((TILE_SIZE, TILE_SIZE))
-
     else:
-        print("Can't get tile : %d - %d - %d" % (zoom_level, i, j))
-        error_flg = 1
-        return input_img_p, error_flg
+        if req_target['type'] == 'tile':
+            url_format = req_target['format']
+            url_format = url_format.replace('{z}', str(zoom_level))
+            url_format = url_format.replace('{x}', str(i))
+            url_format = url_format.replace('{y}', str(j))
+            input_image_url = req_target['url'] + url_format
+
+        elif req_target['type'] == 'wms':
+            start_point = tile2latlon(i, j, zoom_level)
+            end_point = tile2latlon(i + 1, j + 1, zoom_level)
+            url_format = req_target['format']
+            url_format = url_format.replace('{minx}', str(end_point[1]))
+            url_format = url_format.replace('{miny}', str(start_point[0]))
+            url_format = url_format.replace('{maxx}', str(start_point[1]))
+            url_format = url_format.replace('{maxy}', str(end_point[0]))
+            url_format = url_format.replace('{maxy}', str(end_point[0]))
+            url_format = url_format.replace('{output_width}', str(TILE_SIZE))
+            url_format = url_format.replace('{output_height}', str(TILE_SIZE))
+            input_image_url = req_target['url'] + url_format
+
+        print 'input : ' + input_image_url
+
+        res = requests.get(input_image_url, verify=False)
+
+        if res.status_code == 200:
+            content_type = res.headers["content-type"]
+            if 'image' not in content_type:
+                print("Not image URL : %d - %d - %d" % (zoom_level, i, j))
+                error_flg = 1
+                return input_img_p, error_flg
+
+            resfile = StringIO(res.content)
+            input_img_p = Image.open(resfile)
+            input_img_p = input_img_p.resize((TILE_SIZE, TILE_SIZE))
+
+        else:
+            print("Can't get tile : %d - %d - %d" % (zoom_level, i, j))
+            error_flg = 1
+            return input_img_p, error_flg
 
     return input_img_p, error_flg
 
@@ -126,9 +137,6 @@ def getTile(req_target, i, j, zoom_level):
 def dataset_make(images_x_start, images_x_end, images_y_start, images_y_end, zoom_level, imgs_num):
     dataset_size_x = TILE_SIZE * (images_x_end - images_x_start + 1)
     dataset_size_y = TILE_SIZE * (images_y_end - images_y_start + 1)
-
-    dataset_target_img = Image.new('RGBA', (dataset_size_x, dataset_size_y), (0, 0, 0, 0))
-    dataset_img = Image.new('RGBA', (dataset_size_x * 2, dataset_size_y), (0, 0, 0, 0))
 
     dataset_input_img = []
     for i in range(input_img_num):
@@ -139,12 +147,13 @@ def dataset_make(images_x_start, images_x_end, images_y_start, images_y_end, zoo
 
     for i in range(images_x_start, images_x_end + 1):
         for j in range(images_y_start, images_y_end + 1):
-            input_img_p, error_flg = getTile(TARGET_URL, i, j, zoom_level)
-            if error_flg == 1:
-                print("Can't get tile : %d - %d - %d" % (zoom_level, i, j))
-                return dataset_input_img, dataset_target_img, error_flg
-            else:
-                 dataset_target_img.paste(input_img_p, ((i - images_x_start) * TILE_SIZE, (j - images_y_start) * TILE_SIZE))
+            if not TARGET_URL == None:
+                input_img_p, error_flg = getTile(TARGET_URL, i, j, zoom_level)
+                if error_flg == 1:
+                    print("Can't get tile : %d - %d - %d" % (zoom_level, i, j))
+                    return dataset_input_img, dataset_target_img, error_flg
+                else:
+                    dataset_target_img.paste(input_img_p, ((i - images_x_start) * TILE_SIZE, (j - images_y_start) * TILE_SIZE))
 
             for k, req_target in enumerate(INPUT_URL):
                 input_img_p, error_flg = getTile(req_target, i, j, zoom_level)
@@ -157,15 +166,6 @@ def dataset_make(images_x_start, images_x_end, images_y_start, images_y_end, zoo
 
             print("Get tile : %d - %d - %d" % (zoom_level, i, j))
 
-    """target_l = dataset_target_img.convert('L')
-    target_hist = target_l.histogram()
-    if target_hist[255] == dataset_size_x * dataset_size_y:
-        error_flg = 1
-        #dataset_input_img = Image.new('RGBA', (dataset_size_x, dataset_size_y), (255, 0, 0, 255))
-        dataset_target_img = Image.new('RGB', (dataset_size_x, dataset_size_y), (255, 0, 0))
-        print "Skip tile"
-        return dataset_input_img, dataset_target_img, error_flg
-    """
     if error_flg == 0:
         input_chNum = 0
         for tmpimg in dataset_input_img:
@@ -188,7 +188,9 @@ def dataset_make(images_x_start, images_x_end, images_y_start, images_y_end, zoo
         input_array_np_row = input_array_np.tostring()
         dataset_target_img_row = np.array(dataset_target_img).tostring()
 
-        writer = tf.python_io.TFRecordWriter(os.path.join(OUTPUT_PATH, str(imgs_num) + '.tfrecords'))
+        writer = tf.python_io.TFRecordWriter(os.path.join(OUTPUT_PATH,
+                                                          str(imgs_num) + '_' + str(images_x_start + int(kernel_size / 2)) + '_' +
+                                                          str(images_y_start + int(kernel_size / 2)) + '_'  + str(zoom_level) + '.tfrecords'))
         example = tf.train.Example(features=tf.train.Features(feature={
             'height': _int64_feature(dataset_size_y),
             'width': _int64_feature(dataset_size_x),
