@@ -141,10 +141,10 @@ python DataSetMake_tfwiter.py "images_x_start" "images_x_end" "images_y_start" "
 ~~~
 | Parameter | Discription |
 ----|---- 
-| "images_x_start" | 指定する範囲の始点となるタイルのx方向の位置 |
-| "images_x_end" | 指定する範囲の始点となるタイルのx方向の位置 |
-| "images_y_start" | 指定する範囲の始点となるタイルのy方向の位置 |
-| "images_y_end" | 指定する範囲の終点となるタイルのy方向の位置 |
+| "images_x_start" | The address of the x direction of the tile which is the start of the fetching area |
+| "images_x_end" | The address of the x direction of the tile which is the end of the fetching area | |
+| "images_y_start" | The address of the y direction of the tile which is the start of the fetching area | |
+| "images_y_end" | The address of the x direction of the tile which is the end of the fetching area | |
 | --inputJson "INPUTJSON" | 地図タイル取得先URLを設定したjson形式のファイルを指定します。デフォルトは"./jsonSample.txt"|
 | --outputPath "OUTPUTPATH" | データセットの出力先ディレクトリの指定。ディレクトリがない場合は自動生成します。デフォルトは"Data" |
 
