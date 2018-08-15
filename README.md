@@ -1,5 +1,5 @@
 # pix2pix for Map tiles
-In this repository, we release various programs for image conversion using [pix 2 pix - tensor flow] (https://github.com/affinelayer/pix 2 pix - tensorflow) for map tile images published on the web .
+In this repository, we release various programs for image conversion using [pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow) for map tile images published on the web .
 
 ## Operating environment
 The operating environment is below. 
@@ -70,37 +70,37 @@ Then, you can use programes.
 First, You have to create JSON format file whicn include URL of fetching Map tile. A format of JSON file is below. 
 ~~~
 {
- "targetURL": URL of target map tile
+ "targetURL": {URL of target map tile}
 , 
  "inputURL": [
-               URL of target map tile 1
+               {URL of training map tile 1}
               , 
-               URL of target map tile 2
+               {URL of training map tile 2}
              ]
 }
 
 ~~~
 
-| 変数 | 説明 |
+| Parameter | Discription |
 ----|---- 
-| "targetURL" | 教師データとなるタイルの取得先URL |
-| "inputURL" | 入力する地図タイルの取得先URL。[]の中に取得先をカンマ(,)区切りで複数指定することができます。|
+| "targetURL" | URL of target map tile |
+| "inputURL" | URL of training map tile. It is possible to set multipule URL in the "[ ]" divided by "," .　|
 
-教師データと入力データそれぞれの地図タイル取得先を設定します。地図タイル取得先の設定については以下を参照してください。
+Fromat of URL of fetching tile is below.
 
 ~~~
 {
-"url": 地図タイル取得先のベースURL , 
- "type": 取得する地図タイルの種類 , 
- "format": 取得する地図タイルの形式 
+"url": base URL of fetching tile, 
+ "type": type of map tile, 
+ "format": format and parameter for fetching tile 
 }
 ~~~
 
 | 変数 | 説明 |
 ----|---- 
-| "url" | 地図タイルの取得先のベースURL |
-| "type" | 取得する地図タイルの種類。地図タイル形式やWMTSは"tile"、WMSは"wms"になります。|
-| "format" | 拡張子やタイル座標、WMTS やWMSのパラメータなどの設定。詳細については下記の各タイル取得設定例を参照してください。 |
+| "url" | Base URL of fetching tile |
+| "type" | Type of map tile. If you use WMST or "Map tile", set "tile". You can also set "wms" for OGS WMS Standard |
+| "format" | Setting for extention, tile address, parapeter for WMTS and WMS. Detail of setting, please refer setting samples in below. |
 
 
 #### タイル地図形式の地図タイル取得先設定例(国土地理院 全国最新写真（シームレス）)
